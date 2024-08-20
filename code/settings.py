@@ -45,6 +45,7 @@ weapon_data = {
 # magic
 magic_data = {
 	'flame': {'strength': 5,'cost': 20,'graphic':'../graphics/particles/flame/fire.png'},
+	'ice': {'strength': 5,'cost': 20,'graphic':'../graphics/particles/ice/ice.png'},
 	'heal' : {'strength': 20,'cost': 10,'graphic':'../graphics/particles/heal/heal.png'}}
 
 # enemy

@@ -3,7 +3,9 @@ from settings import *
 
 class Menu:
     def __init__(self, screen, title, options):
-        self.__screen = screen
+        self.__screen = screen        
+        self.menu_sound = pygame.mixer.Sound('../audio/menu.wav')
+        self.accept_sound = pygame.mixer.Sound('../audio/accept.wav')
         self.__title = title
         self.__options = options
         #self.__font = pygame.font.Font(None, 74)  # Define a fonte e tamanho do texto
@@ -37,10 +39,13 @@ class Menu:
                     # if event.key == pygame.K_ESCAPE:
                     #     return "back"  # Se o jogador apertar esc volta para o menu anterior
                     if event.key == pygame.K_UP:
+                        self.menu_sound.play()
                         self.__selected = (self.__selected - 1) % len(self.__options)  # Move para cima na lista de opções
-                    elif event.key == pygame.K_DOWN:
+                    elif event.key == pygame.K_DOWN:                        
+                        self.menu_sound.play()
                         self.__selected = (self.__selected + 1) % len(self.__options)  # Move para baixo na lista de opções
                     elif event.key == pygame.K_RETURN:
+                        self.accept_sound.play()
                         return self.__options[self.__selected].lower().replace(" ", "_")  # Retorna a opção selecionada
 
             # Renderiza e desenha as opções na tela

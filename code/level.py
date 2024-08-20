@@ -15,12 +15,12 @@ from upgrade import Upgrade
 from save import SaveManager
 
 class Level:
-	def __init__(self, game_over_callback):
-
+	def __init__(self, game_over_callback):		
 		# get the display surface 
 		self.display_surface = pygame.display.get_surface()
 		self.game_paused = False
-		self.game_over_callback = game_over_callback  # Callback para o game over
+		self.game_over_callback = game_over_callback  # Callback para o game over		
+		self.game_over = pygame.mixer.Sound('../audio/over.ogg')
 
 		# sprite group setup
 		self.visible_sprites = YSortCameraGroup()
@@ -128,6 +128,9 @@ class Level:
 		if style == 'flame':
 			self.magic_player.flame(self.player,cost,[self.visible_sprites,self.attack_sprites])
 
+		if style == 'ice':
+			self.magic_player.ice(self.player,cost,[self.visible_sprites,self.attack_sprites])
+
 	def destroy_attack(self):
 		if self.current_attack:
 			self.current_attack.kill()
@@ -157,6 +160,7 @@ class Level:
 			self.animation_player.create_particles(attack_type,self.player.rect.center,[self.visible_sprites])
 		if self.player.health <= 0:
 			self.player.kill()
+			self.game_over.play()
 			# Chama o Game Over quando o jogador morre
 			return self.game_over_callback()
 			

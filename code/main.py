@@ -25,7 +25,9 @@ class Game:
 		# sound 
 		self.main_sound = pygame.mixer.Sound('../audio/main.ogg')
 		self.main_sound.set_volume(0.5)
-		self.main_sound.play(loops = -1)
+		self.main_sound.play(loops = -1)		
+		self.gameplay_sound = pygame.mixer.Sound('../audio/gameplay.ogg')
+		self.gameplay_sound.set_volume(0.5)
 
 		# Menus    
 		self.paused = False
@@ -36,11 +38,11 @@ class Game:
 		action = menu.run()  # Exibe o menu de Game Over e espera uma ação
 
 		if action == 'restart':
-			self.main_sound.stop()
+			self.gameplay_sound.stop()
 			self.reset_game()
 		elif action == 'exit':
 			self.running = False
-			self.main_sound.stop()
+			self.gameplay_sound.stop()
 
 
 	def run(self):
@@ -68,7 +70,7 @@ class Game:
 					self.level.save_game()
 					self.paused = False  # Retoma o jogo
 				elif action == 'exit':
-					self.main_sound.stop()
+					self.gameplay_sound.stop()
 					self.running = False
 
 			self.screen.fill(WATER_COLOR)
@@ -87,7 +89,9 @@ if __name__ == '__main__':
 		game = Game()
 		main_menu = Menu(game.screen, "Main Menu", ["New Game", "Load Game", "Exit"])
 		action = main_menu.run()
-		if action == 'new_game':
+		if action == 'new_game':			
+			game.main_sound.stop()		
+			game.gameplay_sound.play(loops = -1)	
 			game_result = game.run()
 			if game_result == 'exit_to_menu':
 				continue  # Volta para o menu principal		
