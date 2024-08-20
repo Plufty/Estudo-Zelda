@@ -104,6 +104,8 @@ class Level:
 								if col == '390': monster_name = 'bamboo'
 								elif col == '391': monster_name = 'spirit'
 								elif col == '392': monster_name ='raccoon'
+								elif col == '395': monster_name ='bambooBoss'
+								elif col == '396': monster_name ='flam'
 								else: monster_name = 'squid'
 								enemy = Enemy(
 									monster_name,
