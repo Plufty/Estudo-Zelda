@@ -27,13 +27,15 @@ class Game:
 		self.main_sound.set_volume(0.5)
 		self.main_sound.play(loops = -1)		
 		self.gameplay_sound = pygame.mixer.Sound('../audio/gameplay.ogg')
-		self.gameplay_sound.set_volume(0.5)
+		self.gameplay_sound.set_volume(0.5)		
+		self.gameplay_sound.stop()
 
 		# Menus    
 		self.paused = False
 		self.running = True
 
 	def game_over(self):
+		self.gameplay_sound.stop()
 		menu = Menu(self.screen, "Game Over", ["Restart", "Exit"])
 		action = menu.run()  # Exibe o menu de Game Over e espera uma ação
 
